@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
+        background: url('assets/1.jpg');
     }
     ol, ul {
         list-style: none;
