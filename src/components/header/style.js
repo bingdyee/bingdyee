@@ -20,7 +20,7 @@ const Logo = styled.div`
     @media (min-width: 1200px) {
         min-width: 250px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         display:none!important;
     }
     h1{
@@ -49,6 +49,9 @@ const Search = styled.div`
     @media (min-width:1199px) {
         min-width:600px;
     }
+    @media (max-width: 600px) {
+        display:none!important;
+    }
     input {
         color: #fff;
         background-color: rgba(255,255,255,.08);
@@ -60,11 +63,22 @@ const Search = styled.div`
         width: 100%;
     }
     .iconfont {
+        font-size: 18px;
+        display: block;
+        font-weight: bold;
         left: 0;
         position: absolute;
         width:3rem;
         text-align:center;
         cursor:pointer;
+    }
+    .focused {
+        transform: rotate(360deg);
+        transition: all .4s ease-in;
+    }
+    .unfocus {
+        transform: rotate(360deg);
+        transition: all .4s ease-in;
     }
 `;
 
