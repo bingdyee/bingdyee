@@ -1,48 +1,218 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import SearchIcon from '@material-ui/icons/Search';
-import MailIcon from '@material-ui/icons/Mail';
-import Badge from '@material-ui/core/Badge';
-import { fade } from '@material-ui/core/styles';
-import { AppBar,Toolbar, Typography, InputBase, Icon, IconButton, withStyles } from '@material-ui/core';
+import React from 'react';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu, Icon } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import * as actions from './actions';
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
 
+const useStyles = makeStyles(theme => ({
+    grow: {
+        flexGrow: 1,
+        height: 72,
+    },
+    header: {
+        alignItems: 'center',
+        display: 'flex',
+        height: 72,
+        backgroundColor: 'rgba(0,0,0,.3)'
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+        display: 'block',
+        },
+    },
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.13),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.03),
+        },
+        marginRight: theme.spacing(2),
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(3),
+            width: 'auto',
+        },
+    },
+    searchIcon: {
+        width: theme.spacing(7),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputRoot: {
+        color: 'inherit',
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 7),
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+        width: 740,
+        },
+    },
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+        display: 'flex',
+        },
+    },
+    sectionMobile: {
+        display: 'flex',
+        [theme.breakpoints.up('md')]: {
+        display: 'none',
+        },
+    },
+    logoA: {
+        color: '#fff',
+        backgroundColor: 'transparent',
+        textDecoration: 'none',
+    },
+    time: {
+        padding: 6,
+        borderRadius: 3,
+        marginLeft: 18,
+        marginTop: 8,
+        height: '100%',
+        lineHeight: '100%',
+        fontSize: 20,
+        backgroundColor: fade(theme.palette.common.white, 0.15), 
+    }
+}));
 
-class Header extends Component { 
+export default function PrimarySearchAppBar() {
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    render() {
-        const { focused, searchFocused, searchUnfocus, classes } = this.props;
-        return (
-            <div className={classes.grow}>
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    function handleProfileMenuOpen(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleMobileMenuClose() {
+        setMobileMoreAnchorEl(null);
+    }
+
+    function handleMenuClose() {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    }
+
+    function handleMobileMenuOpen(event) {
+        setMobileMoreAnchorEl(event.currentTarget);
+    }
+
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+    <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+    >
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+    );
+
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <IconButton aria-label="Show 4 new mails" color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                    </Badge>
+                </IconButton>
+                <p>Messages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton aria-label="Show 11 new notifications" color="inherit">
+                    <Badge badgeContent={11} color="secondary">
+                    <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    aria-label="Account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
+
+    return (
+        <div className={classes.grow}>
             <AppBar position="static" className={classes.header}>
-                <Toolbar className={classes.toolBar}>
-                    <Typography variant='h1' color='inherit' className={classes.logo}>
+                <Toolbar>
+                    <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="Open drawer"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography className={classes.title} variant="h6" noWrap>
                         <Link to='/' className={classes.logoA}>IColab Chaos 1.0</Link>
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
-                            <SearchIcon/>
+                            <SearchIcon />
                         </div>
                         <InputBase
-                        placeholder="Search for people, files, documents..."
-                        classes={{
+                            placeholder="Search for people, files, documents..."
+                            classes={{
                             root: classes.inputRoot,
                             input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'Search' }}
+                            }}
+                            inputProps={{ 'aria-label': 'Search' }}
                         />
                     </div>
-                    <div className={classes.menu}>
-                        <IconButton aria-label="Show 4" color="inherit">
+                    <div className={classes.grow} />
+                    <div className={classes.sectionDesktop}>
+                        <IconButton aria-label="Show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="secondary">
-                                <MailIcon />
+                            <MailIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton aria-label="Show 4" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <Icon>notifications</Icon>
+                        <IconButton aria-label="Show 17 new notifications" color="inherit">
+                            <Badge badgeContent={17} color="secondary">
+                            <NotificationsIcon />
                             </Badge>
                         </IconButton>
                         <IconButton color="inherit">
@@ -57,119 +227,22 @@ class Header extends Component {
                         <IconButton color="inherit">
                             <Icon>settings_input_svideo</Icon>
                         </IconButton>
-                        
+                        <Typography variant='h6' className={classes.time} noWrap>20 : 45 : 18</Typography>
                     </div>
-                    <Typography variant='h4' className={classes.time}>12:12:18</Typography>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="Open drawer"
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    <div className={classes.sectionMobile}>
+                        <IconButton
+                            aria-label="Show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={handleMobileMenuOpen}
+                            color="inherit">
+                            <MoreIcon />
+                        </IconButton>
+                    </div>
                 </Toolbar>
             </AppBar>
-            </div>
-        )
-    }
-
+            {renderMobileMenu}
+            {renderMenu}
+        </div>
+    );
 }
-
-const styles = theme => ({
-
-    header: {
-        color: '#fff',
-        display: 'flex',
-        // alignItems: 'center',
-        height: 72,
-        backgroundColor: 'rgba(0,0,0,.3)'
-    },
-    logo: {
-        fontSize: '1.3rem',
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-    },
-    logoA: {
-        color: '#fff',
-        backgroundColor: 'transparent',
-        textDecoration: 'none',
-    },
-    toolBar: {
-        height: 72
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-          backgroundColor: fade(theme.palette.common.black, 0.1),
-        },
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          marginLeft: theme.spacing(3),
-          width: 'auto',
-        },
-      },
-      searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        
-      },
-      inputRoot: {
-        color: 'inherit',
-      },
-      inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-          width: 770,
-        },
-      },
-      menu: {
-        marginLeft: 20,
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'flex',
-        },
-      },
-      time: {
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        padding: '3px 5px 3px 5px',
-        borderRadius: 3,
-        marginLeft: 20,
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'flex',
-        },
-      },
-      menuButton: {
-        display: 'flex',
-        marginLeft: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
-      }
-});
-
-const mapState = (state) => ({
-    focused: state.getIn(['header', 'focused'])
-});
-
-const mapDispatch = (dispatch) => ({
-    searchFocused() {
-        dispatch(actions.getSearchFocusedAction());
-    },
-    searchUnfocus() {
-        dispatch(actions.getSearchUnfocusAction());
-    }
-});
-
-export default connect(mapState, mapDispatch)(withStyles(styles)(Header));
