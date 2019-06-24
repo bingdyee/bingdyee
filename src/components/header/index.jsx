@@ -1,12 +1,15 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu, Icon } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import AppsIcon from '@material-ui/icons/Apps';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import SettingsInputSvideoIcon from '@material-ui/icons/SettingsInputSvideo';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -216,16 +219,16 @@ export default function PrimarySearchAppBar() {
                             </Badge>
                         </IconButton>
                         <IconButton color="inherit">
-                            <Icon>check_circle</Icon>
+                            <CheckCircleIcon/>
                         </IconButton>
                         <IconButton color="inherit">
-                            <Icon>apps</Icon>
+                            <AppsIcon/>
                         </IconButton>
                         <IconButton color="inherit">
-                            <Icon>more_vert</Icon>
+                            <MoreIcon/>
                         </IconButton>
                         <IconButton color="inherit">
-                            <Icon>settings_input_svideo</Icon>
+                            <SettingsInputSvideoIcon/>
                         </IconButton>
                         <Typography variant='h6' className={classes.time} noWrap>20 : 45 : 18</Typography>
                     </div>
