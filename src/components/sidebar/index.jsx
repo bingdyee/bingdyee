@@ -7,7 +7,6 @@ class Sidebar extends Component {
     render() {
         return (
             <SidebarWrapper>
-                SidebarWrapper
             </SidebarWrapper>
         )
     }
