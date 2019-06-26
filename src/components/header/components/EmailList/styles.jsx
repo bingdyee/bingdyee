@@ -6,7 +6,7 @@ export default theme => ({
         borderRadius: 3,
         backgroundColor: fade(theme.palette.common.black, 0.8), 
         color: '#fff',
-        
+        border: '1px solid black',
     },
     header: {
         padding: 5,
@@ -30,7 +30,7 @@ export default theme => ({
         fontWeight: 'bold',
         paddingRight: 20
     },
-    empty: {
+    footer: {
         padding: 0,
         display: 'flex',
         justifyContent: 'center',

@@ -81,4 +81,6 @@ export default theme => ({
         fontSize: 20,
         backgroundColor: fade(theme.palette.common.white, 0.15), 
     },
+    emailBox: {
+    }
 });

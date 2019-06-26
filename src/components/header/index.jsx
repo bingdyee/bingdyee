@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, withStyles  } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, Popover, withStyles  } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
@@ -19,8 +19,23 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: this.formatTime()
+            time: this.formatTime(),
+            emailsEl: null
         };
+        this.handleShowEmailList = this.handleShowEmailList.bind(this);
+        this.handleCloseEmailList = this.handleCloseEmailList.bind(this);
+    }
+
+    handleShowEmailList(event) {
+        this.setState({
+            emailsEl: event.currentTarget
+        });
+    }
+
+    handleCloseEmailList() {
+        this.setState({
+            emailsEl: null
+        });
     }
 
     formatTime() {
@@ -37,73 +52,87 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
+        const { emailsEl } = this.state;
+        const showEmailsList = Boolean(emailsEl);
+
         return (
-            <div className={classes.grow}>
-                <AppBar position="static" className={classes.header}>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="Open drawer"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            <Link to='/' className={classes.logoA}>IColab Chaos 1.0</Link>
-                        </Typography>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                placeholder="Search for people, files, documents..."
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                inputProps={{ 'aria-label': 'Search' }}
-                            />
-                        </div>
-                        <div className={classes.grow} />
-                        <div className={classes.sectionDesktop}>
-                            <IconButton 
-                                aria-label="Show 6 new mails" 
-                                color="inherit" 
-                            >
-                                <Badge badgeContent={6} color="secondary"><MailIcon/></Badge>
-                            </IconButton>
-                            <IconButton 
-                                aria-label="Show 17 new notifications" 
-                                color="inherit"
-                                aria-controls='notifications'
-                            >
-                                <Badge badgeContent={17} color="secondary"><NotificationsIcon/></Badge>
-                            </IconButton>
-                            <IconButton color="inherit">
-                                <CheckCircleIcon/>
-                            </IconButton>
-                            <IconButton color="inherit">
-                                <AppsIcon/>
-                            </IconButton>
-                            <IconButton color="inherit">
-                                <MoreIcon/>
-                            </IconButton>
-                            <IconButton color="inherit" edge="end">
-                                <SettingsInputSvideoIcon/>
-                            </IconButton>
-                            <Typography variant='h6' className={classes.time} noWrap>{this.state.time}</Typography>
-                        </div>
-                        <div className={classes.sectionMobile}>
+            <Fragment>
+                <div className={classes.grow}>
+                    <AppBar position="static" className={classes.header}>
+                        <Toolbar>
                             <IconButton
-                                color="inherit">
-                                <MoreIcon />
+                                edge="start"
+                                className={classes.menuButton}
+                                color="inherit"
+                                aria-label="Open drawer"
+                            >
+                                <MenuIcon />
                             </IconButton>
-                        </div>
-                    </Toolbar>
-                </AppBar>
-                <EmailList/>
-            </div>
+                            <Typography className={classes.title} variant="h6" noWrap>
+                                <Link to='/' className={classes.logoA}>IColab Chaos 1.0</Link>
+                            </Typography>
+                            <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <SearchIcon />
+                                </div>
+                                <InputBase
+                                    placeholder="Search for people, files, documents..."
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                    inputProps={{ 'aria-label': 'Search' }}
+                                />
+                            </div>
+                            <div className={classes.grow} />
+                            <div className={classes.sectionDesktop}>
+                                <IconButton 
+                                    aria-label="Show 6 new mails" 
+                                    color="inherit" 
+                                    onClick={this.handleShowEmailList}
+                                >
+                                    <Badge badgeContent={6} color="secondary"><MailIcon/></Badge>
+                                </IconButton>
+                                <IconButton 
+                                    aria-label="Show 17 new notifications" 
+                                    color="inherit"
+                                    aria-controls='notifications'
+                                >
+                                    <Badge badgeContent={17} color="secondary"><NotificationsIcon/></Badge>
+                                </IconButton>
+                                <IconButton color="inherit">
+                                    <CheckCircleIcon/>
+                                </IconButton>
+                                <IconButton color="inherit">
+                                    <AppsIcon/>
+                                </IconButton>
+                                <IconButton color="inherit">
+                                    <MoreIcon/>
+                                </IconButton>
+                                <IconButton color="inherit" edge="end">
+                                    <SettingsInputSvideoIcon/>
+                                </IconButton>
+                                <Typography variant='h6' className={classes.time} noWrap>{this.state.time}</Typography>
+                            </div>
+                            <div className={classes.sectionMobile}>
+                                <IconButton
+                                    color="inherit">
+                                    <MoreIcon />
+                                </IconButton>
+                            </div>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+                <Popover
+                    anchorEl={emailsEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={this.handleCloseEmailList}
+                    open={showEmailsList}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <EmailList/>
+            </Popover>
+          </Fragment>
         )
     }
 
