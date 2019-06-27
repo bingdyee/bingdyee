@@ -12,10 +12,10 @@ class TaskList extends Component {
         this.state = {
             progress: [
                 {id: 1, title: '作业完成进度', progress: 10, color: 'secondary'},
-                {id: 2, title: '作业完成进度', progress: 88, color: 'secondary'},
+                {id: 2, title: '作业完成进度', progress: 88, color: 'primary'},
                 {id: 3, title: '作业完成进度', progress: 49, color: 'secondary'},
-                {id: 4, title: '作业完成进度', progress: 99, color: 'secondary'},
-                {id: 5, title: '作业完成进度', progress: 75, color: 'secondary'},
+                {id: 4, title: '作业完成进度', progress: 99, color: 'primary'},
+                {id: 5, title: '作业完成进度', progress: 75, color: 'primary'},
             ]
         };
     }

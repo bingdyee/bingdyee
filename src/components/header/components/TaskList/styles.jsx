@@ -6,7 +6,7 @@ export default theme => ({
         maxWidth: '100%',
         borderRadius: 3,
         backgroundColor: fade(theme.palette.common.black, 0.8), 
-        color: '#fff',
+        color: '#aaa',
         border: '1px solid black',
         padding: 0
     },
