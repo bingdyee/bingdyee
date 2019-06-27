@@ -7,15 +7,15 @@ export default theme => ({
         borderRadius: 3,
         backgroundColor: fade(theme.palette.common.black, 0.8), 
         color: '#aaa',
-        border: '1px solid black',
         padding: 0
     },
     header: {
         backgroundColor: fade(theme.palette.common.black, 0.3), 
-        paddingLeft: 15,
+        padding: 10,
+        color: '#fff'
     },
     content: {
-
+        
     },
     progress: {
         '&:hover': {

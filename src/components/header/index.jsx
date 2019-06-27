@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, Popover, withStyles  } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import MailIcon from '@material-ui/icons/Mail';
+import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import AppsIcon from '@material-ui/icons/Apps';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import SettingsInputSvideoIcon from '@material-ui/icons/SettingsInputSvideo';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
 import { Link } from 'react-router-dom';
-import { NotificationList, EmailList, TaskList } from './components';
+import { NotificationList, MessageList, TaskList, AppBox, More } from './components';
 import styles from './styles';
+import * as actions from './actions';
 
 
 class Header extends Component {
@@ -20,50 +21,7 @@ class Header extends Component {
         super(props);
         this.state = {
             time: this.formatTime(),
-            emailsEl: null,
-            notificationsEl: null,
-            tasksEl: null,
         };
-        this.handleShowEmailList = this.handleShowEmailList.bind(this);
-        this.handleCloseEmailList = this.handleCloseEmailList.bind(this);
-        this.handleShowNotificationsList = this.handleShowNotificationsList.bind(this);
-        this.handleCloseNotificationsList = this.handleCloseNotificationsList.bind(this);
-        this.handleShowTaskList = this.handleShowTaskList.bind(this);
-        this.handleCloseTaskList = this.handleCloseTaskList.bind(this);
-    }
-
-    handleShowEmailList(event) {
-        this.setState({
-            emailsEl: event.currentTarget
-        });
-    }
-
-    handleCloseEmailList() {
-        this.setState({
-            emailsEl: null
-        });
-    }
-
-    handleShowNotificationsList(event) {
-        this.setState({
-            notificationsEl: event.currentTarget
-        });
-    }
-
-    handleCloseNotificationsList() {
-        this.setState({
-            notificationsEl: null
-        });
-    }
-
-    handleShowTaskList(event) {
-        this.setState({tasksEl: event.currentTarget});
-    }
-
-    handleCloseTaskList() {
-        this.setState({
-            tasksEl: null
-        });
     }
 
     formatTime() {
@@ -79,11 +37,21 @@ class Header extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { emailsEl, notificationsEl, tasksEl } = this.state;
-        const showEmailsList = Boolean(emailsEl);
+        const { 
+            classes, messagesEl, notificationsEl, 
+            tasksEl, appsEl, moreEl, 
+            handleShowMessageList, handleCloseMessageList, 
+            handleShowNotificationsList, handleCloseNotificationsList,
+            handleShowTaskList, handleCloseTaskList,
+            handleShowAppBox, handleCloseAppBox,
+            handleShowMore, handleCloseMore
+        } = this.props;
+
+        const showMessageList = Boolean(messagesEl);
         const showNotificationList = Boolean(notificationsEl);
         const showTasksList = Boolean(tasksEl);
+        const showAppBox = Boolean(appsEl);
+        const showMore = Boolean(moreEl);
 
         return (
             <Fragment>
@@ -119,34 +87,33 @@ class Header extends Component {
                                 <IconButton 
                                     aria-label="Show 6 new mails" 
                                     color="inherit" 
-                                    onClick={this.handleShowEmailList}
+                                    onClick={handleShowMessageList}
                                 >
-                                    <Badge badgeContent={6} color="secondary"><MailIcon/></Badge>
+                                    <Badge badgeContent={6} color="secondary"><MessageIcon/></Badge>
                                 </IconButton>
                                 <IconButton 
                                     aria-label="Show 8 new notifications" 
                                     color="inherit"
-                                    onClick={this.handleShowNotificationsList}
+                                    onClick={handleShowNotificationsList}
                                 >
                                     <Badge badgeContent={8} color="secondary"><NotificationsIcon/></Badge>
                                 </IconButton>
-                                <IconButton color="inherit" onClick={this.handleShowTaskList}>
+                                <IconButton color="inherit" onClick={handleShowTaskList}>
                                     <CheckCircleIcon/>
                                 </IconButton>
-                                <IconButton color="inherit">
+                                <IconButton color="inherit" onClick={handleShowAppBox}>
                                     <AppsIcon/>
                                 </IconButton>
-                                <IconButton color="inherit">
+                                <IconButton color="inherit" onClick={handleShowMore}>
                                     <MoreIcon/>
                                 </IconButton>
                                 <IconButton color="inherit" edge="end">
-                                    <SettingsInputSvideoIcon/>
+                                    <ColorLensIcon/>
                                 </IconButton>
                                 <Typography variant='h6' className={classes.time} noWrap>{this.state.time}</Typography>
                             </div>
                             <div className={classes.sectionMobile}>
-                                <IconButton
-                                    color="inherit">
+                                <IconButton color="inherit">
                                     <MoreIcon />
                                 </IconButton>
                             </div>
@@ -154,31 +121,54 @@ class Header extends Component {
                     </AppBar>
                 </div>
                 <Popover
-                    anchorEl={emailsEl}
+                    keepMounted
+                    anchorEl={messagesEl}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    onClose={this.handleCloseEmailList}
-                    open={showEmailsList}
+                    onClose={handleCloseMessageList}
+                    open={showMessageList}
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
-                    <EmailList/>
+                    <MessageList/>
                 </Popover>
                 <Popover
+                    keepMounted
                     anchorEl={notificationsEl}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    onClose={this.handleCloseNotificationsList}
+                    onClose={handleCloseNotificationsList}
                     open={showNotificationList}
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
                     <NotificationList/>
                 </Popover>
                 <Popover
+                    keepMounted
                     anchorEl={tasksEl}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    onClose={this.handleCloseTaskList}
+                    onClose={handleCloseTaskList}
                     open={showTasksList}
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
                     <TaskList/>
+                </Popover>
+                <Popover
+                    keepMounted
+                    anchorEl={appsEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={handleCloseAppBox}
+                    open={showAppBox}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <AppBox/>
+                </Popover>
+                <Popover
+                    keepMounted
+                    anchorEl={moreEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={handleCloseMore}
+                    open={showMore}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <More/>
                 </Popover>
           </Fragment>
         )
@@ -187,6 +177,44 @@ class Header extends Component {
 }
 
 const mapState = (state) => ({
+    messagesEl: state.getIn(['header', 'messagesEl']),
+    notificationsEl: state.getIn(['header', 'notificationsEl']),
+    tasksEl: state.getIn(['header', 'tasksEl']),
+    appsEl: state.getIn(['header', 'appsEl']),
+    moreEl: state.getIn(['header', 'moreEl'])
+});
+
+const mapDispatch = (dispatch) => ({
+    handleShowMessageList(event) {
+        dispatch(actions.getShowMessageAction(event));
+    },
+    handleCloseMessageList() {
+        dispatch(actions.getCloseMessageAction());
+    },
+    handleShowNotificationsList(event) {
+        dispatch(actions.getShowNotificationsAction(event));
+    },
+    handleCloseNotificationsList() {
+        dispatch(actions.getCloseNotificationsAction());
+    },
+    handleShowTaskList(event) {
+        dispatch(actions.getShowTasksAction(event));
+    },
+    handleCloseTaskList() {
+        dispatch(actions.getCloseTasksAction());
+    },
+    handleShowAppBox(event) {
+        dispatch(actions.getShowAppsAction(event));
+    },
+    handleCloseAppBox() {
+        dispatch(actions.getCloseAppsAction());
+    },
+    handleShowMore(event) {
+        dispatch(actions.getShowMoreAction(event));
+    },
+    handleCloseMore() {
+        dispatch(actions.getCloseMoreAction());
+    }
 });
     
-export default connect(mapState, null)(withStyles(styles)(Header));
+export default connect(mapState, mapDispatch)(withStyles(styles)(Header));

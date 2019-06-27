@@ -3,7 +3,7 @@ import { Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText, Butto
 import styles from './styles';
 
 
-class EmailList extends Component {
+class MessageList extends Component {
 
     constructor(props) {
         super(props);
@@ -32,15 +32,17 @@ class EmailList extends Component {
                         <List>
                             {
                                 this.state.emails.map(item => {
-                                    return <ListItem key={item.id} button className={classes.item}>
-                                        <ListItemAvatar>
-                                            <Avatar alt="Profile Picture" src={item.headerImg} />
-                                        </ListItemAvatar>
-                                        <ListItemText classes={{secondary: classes.secondary}} primary={item.primary} secondary={item.secondary} />
-                                        <Typography className={classes.href}>
-                                            <span>{item.time}</span>
-                                        </Typography>
-                                    </ListItem>
+                                    return  (
+                                        <ListItem key={item.id} button className={classes.item}>
+                                            <ListItemAvatar>
+                                                <Avatar alt="Profile Picture" src={item.headerImg} />
+                                            </ListItemAvatar>
+                                            <ListItemText classes={{secondary: classes.secondary}} primary={item.primary} secondary={item.secondary} />
+                                            <Typography className={classes.href}>
+                                                <span>{item.time}</span>
+                                            </Typography>
+                                        </ListItem>
+                                    )
                                 })
                             }
                             <ListItem className={classes.footer}>
@@ -55,4 +57,4 @@ class EmailList extends Component {
 
 }
 
-export default withStyles(styles)(EmailList);
+export default withStyles(styles)(MessageList);

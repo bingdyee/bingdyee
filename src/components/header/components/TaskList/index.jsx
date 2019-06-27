@@ -27,21 +27,22 @@ class TaskList extends Component {
                 <div className={classes.header}>
                     <Typography variant="h6">任务</Typography>
                 </div>
-                
-                <List className={classes.content}>
-                    {
-                        this.state.progress.map(item => {
-                            return (
-                                <ListItem key={item.id} className={classes.progress}>
-                                    <ListItemText>
-                                        <Typography gutterBottom>{item.title}</Typography>
-                                        <LinearProgress variant="determinate" color={item.color} value={item.progress} />
-                                    </ListItemText>
-                                </ListItem>
-                            )
-                        })
-                    }
-                </List>
+                <div className={classes.content}>
+                    <List>
+                        {
+                            this.state.progress.map(item => {
+                                return (
+                                    <ListItem key={item.id} className={classes.progress}>
+                                        <ListItemText>
+                                            <Typography gutterBottom>{item.title}</Typography>
+                                            <LinearProgress variant="determinate" color={item.color} value={item.progress} />
+                                        </ListItemText>
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </List>
+                </div>
             </Typography>
         )
     }
