@@ -7,6 +7,7 @@ export default theme => ({
         backgroundColor: fade(theme.palette.common.black, 0.8), 
         color: '#fff',
         border: '1px solid black',
+        padding: 0
     },
     header: {
         padding: 5,
@@ -41,6 +42,8 @@ export default theme => ({
             '& button': {
                 color: '#fff'
             }
-        }
+        },
+        borderTop: '1px solid #aaa',
+        top: 16
     }
 });

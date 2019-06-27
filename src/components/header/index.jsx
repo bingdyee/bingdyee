@@ -20,10 +20,13 @@ class Header extends Component {
         super(props);
         this.state = {
             time: this.formatTime(),
-            emailsEl: null
+            emailsEl: null,
+            notificationsEl: null
         };
         this.handleShowEmailList = this.handleShowEmailList.bind(this);
         this.handleCloseEmailList = this.handleCloseEmailList.bind(this);
+        this.handleShowNotificationsList = this.handleShowNotificationsList.bind(this);
+        this.handleCloseNotificationsList = this.handleCloseNotificationsList.bind(this);
     }
 
     handleShowEmailList(event) {
@@ -35,6 +38,18 @@ class Header extends Component {
     handleCloseEmailList() {
         this.setState({
             emailsEl: null
+        });
+    }
+
+    handleShowNotificationsList(event) {
+        this.setState({
+            notificationsEl: event.currentTarget
+        });
+    }
+
+    handleCloseNotificationsList() {
+        this.setState({
+            notificationsEl: null
         });
     }
 
@@ -52,8 +67,9 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
-        const { emailsEl } = this.state;
+        const { emailsEl, notificationsEl } = this.state;
         const showEmailsList = Boolean(emailsEl);
+        const showNotificationList = Boolean(notificationsEl);
 
         return (
             <Fragment>
@@ -96,7 +112,7 @@ class Header extends Component {
                                 <IconButton 
                                     aria-label="Show 17 new notifications" 
                                     color="inherit"
-                                    aria-controls='notifications'
+                                    onClick={this.handleShowNotificationsList}
                                 >
                                     <Badge badgeContent={17} color="secondary"><NotificationsIcon/></Badge>
                                 </IconButton>
@@ -131,7 +147,16 @@ class Header extends Component {
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
                     <EmailList/>
-            </Popover>
+                </Popover>
+                <Popover
+                    anchorEl={notificationsEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={this.handleCloseNotificationsList}
+                    open={showNotificationList}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <EmailList/>
+                </Popover>
           </Fragment>
         )
     }

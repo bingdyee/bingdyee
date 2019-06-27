@@ -5,7 +5,7 @@ import { GlobalStyle } from './style';
 
 import store from './store';
 import { Header, Sidebar } from './components';
-import * as pages from './pages';
+import * as pages from './views';
 
 
 class App extends Component {
