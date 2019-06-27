@@ -10,7 +10,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SettingsInputSvideoIcon from '@material-ui/icons/SettingsInputSvideo';
 import { Link } from 'react-router-dom';
-import { NotificationList, EmailList } from './components';
+import { NotificationList, EmailList, TaskList } from './components';
 import styles from './styles';
 
 
@@ -21,12 +21,15 @@ class Header extends Component {
         this.state = {
             time: this.formatTime(),
             emailsEl: null,
-            notificationsEl: null
+            notificationsEl: null,
+            tasksEl: null,
         };
         this.handleShowEmailList = this.handleShowEmailList.bind(this);
         this.handleCloseEmailList = this.handleCloseEmailList.bind(this);
         this.handleShowNotificationsList = this.handleShowNotificationsList.bind(this);
         this.handleCloseNotificationsList = this.handleCloseNotificationsList.bind(this);
+        this.handleShowTaskList = this.handleShowTaskList.bind(this);
+        this.handleCloseTaskList = this.handleCloseTaskList.bind(this);
     }
 
     handleShowEmailList(event) {
@@ -53,6 +56,16 @@ class Header extends Component {
         });
     }
 
+    handleShowTaskList(event) {
+        this.setState({tasksEl: event.currentTarget});
+    }
+
+    handleCloseTaskList() {
+        this.setState({
+            tasksEl: null
+        });
+    }
+
     formatTime() {
         const time = new Date();
         const hour = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
@@ -67,9 +80,10 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
-        const { emailsEl, notificationsEl } = this.state;
+        const { emailsEl, notificationsEl, tasksEl } = this.state;
         const showEmailsList = Boolean(emailsEl);
         const showNotificationList = Boolean(notificationsEl);
+        const showTasksList = Boolean(tasksEl);
 
         return (
             <Fragment>
@@ -110,13 +124,13 @@ class Header extends Component {
                                     <Badge badgeContent={6} color="secondary"><MailIcon/></Badge>
                                 </IconButton>
                                 <IconButton 
-                                    aria-label="Show 17 new notifications" 
+                                    aria-label="Show 8 new notifications" 
                                     color="inherit"
                                     onClick={this.handleShowNotificationsList}
                                 >
-                                    <Badge badgeContent={17} color="secondary"><NotificationsIcon/></Badge>
+                                    <Badge badgeContent={8} color="secondary"><NotificationsIcon/></Badge>
                                 </IconButton>
-                                <IconButton color="inherit">
+                                <IconButton color="inherit" onClick={this.handleShowTaskList}>
                                     <CheckCircleIcon/>
                                 </IconButton>
                                 <IconButton color="inherit">
@@ -155,7 +169,16 @@ class Header extends Component {
                     open={showNotificationList}
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
-                    <EmailList/>
+                    <NotificationList/>
+                </Popover>
+                <Popover
+                    anchorEl={tasksEl}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={this.handleCloseTaskList}
+                    open={showTasksList}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <TaskList/>
                 </Popover>
           </Fragment>
         )

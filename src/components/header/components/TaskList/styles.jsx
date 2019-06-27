@@ -12,34 +12,16 @@ export default theme => ({
     },
     header: {
         backgroundColor: fade(theme.palette.common.black, 0.3), 
-        overflow: 'hidden',
-        alignSelf: 'center'
-    },
-    title: {
-        float: 'left',
-        margin: 10,
-    },
-    icon: {
-        marginRight: 10,
-        float: 'right'
+        paddingLeft: 15,
     },
     content: {
-        color: '#aaa',
+
     },
-    item: {
-        padding: 0,
-        color: '#ccc',
+    progress: {
         '&:hover': {
             backgroundColor: fade(theme.palette.common.black, 0.3), 
             color: '#fff'
         }
-    },
-    itemIcon: {
-        marginLeft: 15,
-        marginRight: 18,
-    },
-    itemText: {
-
     }
-
+    
 });

@@ -63,7 +63,7 @@ export default theme => ({
     sectionMobile: {
         display: 'flex',
         [theme.breakpoints.up('md')]: {
-        display: 'none',
+            display: 'none',
         },
     },
     logoA: {

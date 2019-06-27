@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText, Button, withStyles } from '@material-ui/core';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import styles from './styles';
 
 

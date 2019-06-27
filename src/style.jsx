@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 
 
@@ -30,7 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
-        background: url('assets/1.jpg');
+        background: url('assets/bg.jpg');
+        background-size:cover;
     }
     ol, ul {
         list-style: none;
