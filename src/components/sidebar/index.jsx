@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
-
-import { SidebarWrapper } from './style';
+import { List, withStyles  } from '@material-ui/core';
+import styles from './styles';
+import { ProfileBox } from './components';
 
 class Sidebar extends Component { 
 
     render() {
+        const { classes } = this.props;
         return (
-            <SidebarWrapper>
-            </SidebarWrapper>
+            <nav className={classes.root}>
+                <div className={classes.profile}>
+                    <ProfileBox/>
+                </div>
+
+                <div className={classes.menu}>
+                    <List>
+                        
+                    </List>
+                </div>
+            </nav>
         )
     }
 
 }
 
-export default Sidebar;
+export default withStyles(styles)(Sidebar);

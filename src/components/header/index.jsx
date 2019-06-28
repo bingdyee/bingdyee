@@ -34,6 +34,10 @@ class Header extends Component {
 
     componentDidMount() {
         setInterval(() => this.setState({time: this.formatTime()}), 1000);
+        const { fetchNotifications, fetchMessages, fetchTasks } = this.props;
+        fetchNotifications();
+        fetchMessages();
+        fetchTasks();
     }
 
     render() {
@@ -44,7 +48,7 @@ class Header extends Component {
             handleShowNotificationsList, handleCloseNotificationsList,
             handleShowTaskList, handleCloseTaskList,
             handleShowAppBox, handleCloseAppBox,
-            handleShowMore, handleCloseMore
+            handleShowMore, handleCloseMore,
         } = this.props;
 
         const showMessageList = Boolean(messagesEl);
@@ -214,6 +218,15 @@ const mapDispatch = (dispatch) => ({
     },
     handleCloseMore() {
         dispatch(actions.getCloseMoreAction());
+    },
+    fetchNotifications() {
+        dispatch(actions.fetchNotification());
+    },
+    fetchMessages() {
+        dispatch(actions.fetchMessage());
+    },
+    fetchTasks() {
+        dispatch(actions.fetchTask());
     }
 });
     

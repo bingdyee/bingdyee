@@ -7,7 +7,10 @@ const defaultState = fromJS({
     notificationsEl: null,
     tasksEl: null,
     appsEl: null,
-    moreEl: null
+    moreEl: null,
+    notifications: [],
+    messages: [],
+    tasks: []
 })
 
 export default (state=defaultState, action) => {
@@ -36,6 +39,12 @@ export default (state=defaultState, action) => {
             return state.set('moreEl', action.el);
         case constants.CLOSE_MORE:
             return state.set('moreEl', null);
+        case constants.FETCH_NOTIFICATION:
+            return state.set('notifications', action.data);
+        case constants.FETCH_MESSAGE:
+            return state.set('messages', action.data);
+        case constants.FETCH_TASK:
+            return state.set('tasks', action.data);
         default:
             return state;
     }

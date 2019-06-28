@@ -1,27 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Typography, List, ListItem, ListItemText, withStyles } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import styles from './styles';
 
 
-class TaskList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            progress: [
-                {id: 1, title: '作业完成进度', progress: 10, color: 'secondary'},
-                {id: 2, title: '作业完成进度', progress: 88, color: 'primary'},
-                {id: 3, title: '作业完成进度', progress: 49, color: 'secondary'},
-                {id: 4, title: '作业完成进度', progress: 99, color: 'primary'},
-                {id: 5, title: '作业完成进度', progress: 75, color: 'primary'},
-            ]
-        };
-    }
+class TaskList extends PureComponent {
 
     render() {
-        const { classes } = this.props;
+        const { classes, tasks } = this.props;
         return (
             <Typography variant="h5" className={classes.root}>
                 <div className={classes.header}>
@@ -30,12 +18,13 @@ class TaskList extends Component {
                 <div className={classes.content}>
                     <List>
                         {
-                            this.state.progress.map(item => {
+                            tasks.map(item => {
+                                const color = item.get('progress') > 50 ? 'primary' : 'secondary';
                                 return (
-                                    <ListItem key={item.id} className={classes.progress}>
+                                    <ListItem key={item.get('id')} className={classes.progress}>
                                         <ListItemText>
-                                            <Typography gutterBottom>{item.title}</Typography>
-                                            <LinearProgress variant="determinate" color={item.color} value={item.progress} />
+                                            <Typography gutterBottom>{item.get('title')}</Typography>
+                                            <LinearProgress variant="determinate" color={color} value={item.get('progress')} />
                                         </ListItemText>
                                     </ListItem>
                                 )
@@ -48,4 +37,8 @@ class TaskList extends Component {
     }
 }
 
-export default withStyles(styles)(TaskList);
+const mapState = (state) => ({
+    tasks: state.getIn(["header", "tasks"])
+});
+
+export default connect(mapState, null)(withStyles(styles)(TaskList));
