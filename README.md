@@ -1,7 +1,7 @@
 # Hey there, I'm Noa Swartz! 👋
 
-- 🔭 I’m currently working on a research platform to help mass and public to discover scientific knowledge.
-- 🌱 I’m currently learning k8s.
+- 🔭 I’m currently working on a research platform to help researcher and public to discover scientific knowledge.
+- 🌱 I’m currently learning Microservice Governance.
 - 💬 Ask me about Java, Python, Web Security or any computer science related stuff.
 - 😄 Pronouns: He/His
 - 🗲 Hobbies: Cycling & Travel
