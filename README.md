@@ -1,10 +1,11 @@
 # Hey there, I'm Noa Swartz! 👋
 
 - 🔭 I’m currently working on a research platform to help researcher and public to discover scientific knowledge.
-- 🌱 I’m currently learning Microservice Governance.
-- 💬 Ask me about Java, Python, Web Security or any computer science related stuff.
+- 🌱 I’m currently learning AIOps.
+- 💬 Ask me about Java, Python, Microservice or any computer science related stuff.
 - 😄 Pronouns: He/His
-- 🗲 Hobbies: Cycling & Travel
+- ⚡ Hobbies: Cycling & Travel
+- 📫 How to reach me: [fetaxyu@gmail.com](mailto:fetaxyu@gmail.com)
 
 **Languages and Tools:** 
 
