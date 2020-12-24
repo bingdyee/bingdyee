@@ -1,6 +1,6 @@
 # Hey there, I'm Noa Swartz! 👋
 
-- 🔭 I’m currently working on a research platform to help researcher and public to discover scientific knowledge.
+- 🔭 I’m currently working on a research platform to help the researcher and the public better discover scientific knowledge.
 - 🌱 I’m currently learning AIOps.
 - 💬 Ask me about Java, Python, Microservice or any computer science related stuff.
 - 😄 Pronouns: He/His
