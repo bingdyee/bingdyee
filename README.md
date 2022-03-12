@@ -1,4 +1,4 @@
-# Hey there, I'm Noa Swartz! 👋
+# Hey there, I'm Bing D. Yee! 👋
 
 - 🔭 I’m currently working on a research platform to help researchers and publics better discover scientific knowledge.
 - 🌱 I’m currently learning AIOps.
