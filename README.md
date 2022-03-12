@@ -10,4 +10,4 @@
 **Languages and Tools:** 
 
 [![Bing's most used languages](https://github-readme-stats.vercel.app/api/top-langs/?username=bingdyee&theme=light&count_private=true&layout=compact)](https://github.com/vbintx)
-[![Bing's github stats](https://github-readme-stats.vercel.app/api?username=bingdye&show_icons=true&theme=light&line_height=27&include_all_commits=true&count_private=true&hide=issues,prs)](https://github.com/bingdyee)
+[![Bing's github stats](https://github-readme-stats.vercel.app/api?username=bingdyee&show_icons=true&theme=light&line_height=27&include_all_commits=true&count_private=true&hide=issues,prs)](https://github.com/bingdyee)
