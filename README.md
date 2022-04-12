@@ -1,7 +1,7 @@
 # Hey there, I'm Bing D. Yee! 👋
 
 - 🔭 I’m currently working on a research platform to help researchers and publics better discover scientific knowledge.
-- 🌱 I’m currently learning AIOps.
+- 🌱 I’m currently learning Vert.x.
 - 💬 Ask me about Java, Python, Microservice or any computer science related stuff.
 - 😄 Pronouns: He/His
 - ⚡ Hobbies: Cycling & Travel
