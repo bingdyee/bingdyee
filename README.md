@@ -2,7 +2,7 @@
 
 - 🔭 I’m currently working on a research platform to help researchers and publics better discover scientific knowledge.
 - 🌱 I’m currently learning Vert.x.
-- 💬 Ask me about Java, Python, Microservice or any computer science related stuff.
+- 💬 Ask me about Java, Golang, Python, Microservice or any computer science related stuff.
 - 😄 Pronouns: He/His
 - ⚡ Hobbies: Cycling & Travel
 - 📫 How to reach me: [bingdyee@gmail.com](mailto:bingdyee@gmail.com)
