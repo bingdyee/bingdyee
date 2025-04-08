@@ -1,10 +1,10 @@
 # Hey there, I'm Bing D. Yee! 👋
 
 - 🔭 I’m currently working on a research platform to help researchers and publics better discover scientific knowledge.
-- 🌱 I’m currently learning Vert.x.
+- 🌱 I’m currently writing science fiction.
 - 💬 Ask me about Java, Golang, Python, Microservice or any computer science related stuff.
 - 😄 Pronouns: He/His
-- ⚡ Hobbies: Cycling & Travel
+- ⚡ Hobbies: Writing & Cycling & Travel
 - 📫 How to reach me: [bingdyee@gmail.com](mailto:bingdyee@gmail.com)
 
 **Languages and Tools:** 
