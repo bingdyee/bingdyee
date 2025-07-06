@@ -4,7 +4,7 @@
 - 🌱 I’m currently exploring new worlds through science fiction writing.
 - 💬 Ask me about Java, Golang, Python, Microservice, AI or any computer science related stuff.
 - 😄 Pronouns: He/His
-- ⚡ Hobbies: Writing & Cycling & Travel
+- ⚡ Hobbies: Writing, Cycling, and Travel
 - 📫 How to reach me: [bingdyee@gmail.com](mailto:bingdyee@gmail.com)
 
 **Languages and Tools:** 
